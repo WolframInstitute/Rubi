@@ -49,8 +49,40 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+/build/
+/Rubi/build/
+/Rubi/Documentation/
+/Rubi/ResourceDefinition.nb
+*.paclet
+
 # Editor-based Rest Client
 .idea/httpRequests
 
 /Rubi.iml
 /.idea/
+
+# Agent artifacts
+.gemini/
+.agent/
+.agents/
+_agent/
+_agents/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Wolfram
+*.mx
+*.wl.bak
+
+# Temporary files
+/tmp/
+*.tmp
+*.swp
+*~

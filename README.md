@@ -12,15 +12,43 @@ One major advantage of Rubi is that it can provide the exact steps that are requ
 Since Rubi rules follow a decision tree, the transformation and the required conditions can be provided for each
 integration step.
 
+## Paclet
+
+The `Rubi` directory is the **`WolframInstitute/Rubi`** paclet, with public context ``Rubi` ``. Build an archive without loading the rules:
+
+```sh
+wolframscript -file tools/BuildPaclet.wls
+```
+
+The paclet records upstream source snapshot `61e9c18ea248061cd83c67882f7c91a73cef912d` separately in `$RubiSourceCommit`. Paclet loading uses a versioned memory-image cache below `$UserBaseDirectory/Caches/Rubi`, never the installation directory. `RubiClearMemoryImages[]` removes those cache files. Direct development loading with `Get["Rubi/Rubi.m"]` still bypasses the cache so edited rules are not hidden by a stale image.
+
+Albert D. Rich's rules remain under `Rubi/IntegrationRules`, with their original load order in `Rubi/Rubi.m`. The paclet includes the project's MIT licence and preserves the original authorship and attribution.
+
+### Loading checks
+
+Run the cold, warm and direct-source checks in separate fresh kernels with the same initially empty cache directory. Each check is bounded at 600 seconds and 4 GiB internally; run it in an externally memory-capped environment as well.
+
+```sh
+cache=$(mktemp -d)
+wolframscript -file tools/CheckPacletLoading.wls cold "$cache"
+wolframscript -file tools/CheckPacletLoading.wls warm "$cache"
+wolframscript -file tools/CheckPacletLoading.wls direct "$cache"
+rm -rf "$cache"
+```
+
+The warm check asserts that the MX image was actually loaded. The direct check runs with that image present and asserts that `Rubi.m` still bypasses it, as required for rule development and baseline workers.
+
 ## Documentation
 
-The user documentation of the Rubi project can be found under [rulebasedintegration.org](https://rulebasedintegration.org).
-For an installation- and usage-guide, please see the [Mathematica Package](https://rulebasedintegration.org/mathematicaPackage.html) section on [rulebasedintegration.org](https://rulebasedintegration.org).
+The paclet's documentation is authored as literate Markdown under `Rubi/docs`, with `Rubi/ResourceDefinition.md` as its PacletPage definition. Build it with PacletPage and MarkdownToNotebook:
 
+```sh
+wolframscript -file tools/BuildDocumentation.wls
+```
 
-Certain development specific information about this Mathematica package can be found in the [Rubi GitHub Wiki](https://github.com/RuleBasedIntegration/Rubi/wiki).
-There, you will also find how you can contribute to the project.
-Since the Wiki is at the moment not complete, please also visit the [current Rubi website](http://www.apmaths.uwo.ca/~arich/).
+Set `PACLET_PAGE_DIRECTORY` to a local PacletPage checkout when it is not installed, and `MARKDOWN_TO_NOTEBOOK` to a local `MarkdownToNotebook.wl` to avoid retrieving the published converter. The build evaluates the examples, so it requires a licensed kernel and loads the full rule corpus. Generated notebooks and build caches are gitignored; an offline documentation build does not deploy or publish anything.
+
+The original user documentation remains at [rulebasedintegration.org](https://rulebasedintegration.org), including the [installation and usage guide](https://rulebasedintegration.org/mathematicaPackage.html). Development information is also available in the [Rubi GitHub Wiki](https://github.com/RuleBasedIntegration/Rubi/wiki) and the [original Rubi website](http://www.apmaths.uwo.ca/~arich/).
 
 ## Repository structure and development
 

@@ -73,8 +73,10 @@ Begin["`Private`"];
 
 $rubiDir = DirectoryName[System`Private`$InputFileName];
 
+Get[FileNameJoin[{$rubiDir, "MemoryImages.wl"}]];
 
-$RubiVersion = StringJoin["Rubi ", Version /. List@@Get[FileNameJoin[{$rubiDir, "PacletInfo.m"}]]];
+
+$RubiVersion = StringJoin["Rubi ", pacletVersion[]];
 PrintTemporary["Loading " <> $RubiVersion <> " will take a minute or two. In the future this will take less than a second."];
 
 
@@ -90,9 +92,8 @@ $stepRoutines = FileNameJoin[{$rubiDir, "ShowStepRoutines.m"}];
 $ruleFormatting = FileNameJoin[{$rubiDir, "ShowStepFormatting.m"}];
 
 
-RubiClearMemoryImages[] := 
-  Module[{files = FileNames["*.mx", {FileNameJoin[{$rubiDir, "Kernel"}]}]},
-  Map[DeleteFile,files]]
+RubiClearMemoryImages[] :=
+  Rubi`Private`clearMemoryImages[]
 
 
 LoadRules::inv = "Could not load file or section: ``";
