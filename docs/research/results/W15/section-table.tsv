@@ -1,0 +1,15 @@
+# F excludes unverified; raw rows retain conservative F grades. Per-worker cgroup memory limit: 5 GiB; per-problem MemoryConstrained limit: 4 GiB; single OOMs retried without grading
+section	N	A	B	C	F	unverified	A%	F%	solved	wrong	unresolved	timeout	mean_s	total_s
+ALL	85842	64582	3704	9012	5493	3051	75.23	6.40	77297	48	5242	122	2.945	252555.7
+BlakeRational	99	38	2	54	1	4	38.38	1.01	94	0	0	1	2.009	198.9
+2 Exponentials	965	804	7	33	121	0	83.32	12.54	844	0	121	0	0.535	516.1
+0 Independent test suites	1869	1702	64	75	11	17	91.06	0.59	1841	0	11	0	0.497	929.5
+8 Special functions	1949	1397	31	49	468	4	71.68	24.01	1476	1	462	0	0.382	741.9
+3 Logarithms	3085	2177	262	183	456	7	70.57	14.78	2622	21	435	0	0.928	2862.8
+Blake	3154	2755	58	87	217	37	87.35	6.88	2900	1	214	2	4.729	14914.9
+5 Inverse trig functions	4585	2609	114	582	1163	117	56.90	25.37	3305	0	1155	8	3.135	14372.2
+6 Hyperbolic functions	5080	3806	306	398	472	98	74.92	9.29	4510	1	449	22	5.159	26208.4
+7 Inverse hyperbolic functions	6552	4745	97	503	761	446	72.42	11.61	5345	6	736	19	2.486	16288.6
+Hebisch	10335	9162	725	75	350	23	88.65	3.39	9962	1	332	16	1.115	11524.9
+4 Trig functions	22472	15224	1142	2897	1332	1877	67.75	5.93	19263	8	1198	54	4.953	110975.6
+1 Algebraic functions	25697	20163	896	4076	141	421	78.46	0.55	25135	9	129	0	2.064	53022.0
