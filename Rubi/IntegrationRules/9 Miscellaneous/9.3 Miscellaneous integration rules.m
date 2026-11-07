@@ -428,17 +428,21 @@ Int[u_,x_Symbol] :=
 If[TrueQ[$LoadShowSteps],
 
 Int[u_/x_,x_Symbol] :=
+  If[FreeQ[u,x],
+    u*Log[x],
   With[{lst=PowerVariableExpn[u,0,x]},
   ShowStep["","Int[F[(c*x)^n]/x,x]","Subst[Int[F[x]/x,x],x,(c*x)^n]/n",Hold[
   1/lst[[2]] \[Star] Subst[Int[NormalizeIntegrand[Simplify[lst[[1]]/x],x],x],x,(lst[[3]]*x)^lst[[2]]]]] /;
- Not[FalseQ[lst]] && NeQ[lst[[2]],0]] /;
-SimplifyFlag && NonsumQ[u] && Not[RationalFunctionQ[u,x]],
+ Not[FalseQ[lst]] && NeQ[lst[[2]],0]]] /;
+SimplifyFlag && NonsumQ[u] && (Not[RationalFunctionQ[u,x]] || FreeQ[u,x]),
 
 Int[u_/x_,x_Symbol] :=
+  If[FreeQ[u,x],
+    u*Log[x],
   With[{lst=PowerVariableExpn[u,0,x]},
   1/lst[[2]] \[Star] Subst[Int[NormalizeIntegrand[Simplify[lst[[1]]/x],x],x],x,(lst[[3]]*x)^lst[[2]]] /;
- Not[FalseQ[lst]] && NeQ[lst[[2]],0]] /;
-NonsumQ[u] && Not[RationalFunctionQ[u,x]]]
+ Not[FalseQ[lst]] && NeQ[lst[[2]],0]]] /;
+NonsumQ[u] && (Not[RationalFunctionQ[u,x]] || FreeQ[u,x])]
 
 
 (* ::Code:: *)

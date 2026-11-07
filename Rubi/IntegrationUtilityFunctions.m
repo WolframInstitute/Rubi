@@ -601,9 +601,15 @@ GeneralizedTrinomialQ[u_,x_Symbol] :=
 (*PosQ[u]*)
 
 
+finiteExpressionQ::usage = "finiteExpressionQ[u] returns False when u contains an infinite, indeterminate or undefined value, and True otherwise.";
+finiteExpressionQ[u_] := FreeQ[u, ComplexInfinity | Indeterminate | DirectedInfinity[_] | Undefined]
+
+
 PosQ::usage = "If u is not 0 and has a positive form, PosQ[u] returns True, else it returns False.";
 PosQ[u_] :=
   PosAux[TogetherSimplify[u]]
+
+PosAux[u_] /; !finiteExpressionQ[u] := False
 
 PosAux[u_] :=
   If[NumberQ[u],
@@ -639,8 +645,9 @@ PosAux[u_] :=
 
 
 NegQ::usage = "If u is not 0 and has a negative form, NegQ[u] returns True, else it returns False.";
+NegQ[u_] /; !finiteExpressionQ[u] := False
 NegQ[u_] :=
-  Not[PosQ[u]] && NeQ[u,0]
+  finiteExpressionQ[TogetherSimplify[u]] && Not[PosQ[u]] && NeQ[u,0]
 
 
 (* ::Subsection::Closed:: *)
@@ -5137,6 +5144,7 @@ SquareRootOfQuadraticSubst[u_,vv_,xx_,x_Symbol] :=
 
 
 Subst::usage = "Subst[u,x,v] returns u with all nondummy occurences of x replaced by v and resulting constant terms replaced by 0.";
+Subst[u_,x_Symbol,x_] := u
 Subst[u_,x_Symbol,v_] :=
   If[PowerQ[v] && Not[IntegerQ[v[[2]]]] && 
       MatchQ[v[[1]],a_+b_.*x+c_.*x^2 /; FreeQ[{a,b,c},x] && Not[AtomQ[b]]] && 
