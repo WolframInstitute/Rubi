@@ -1,0 +1,39 @@
+{
+  "referenceDate": "2026-11-05",
+  "collectionPage": "https://www.12000.org/my_notes/CAS_integration_tests/reports/summer_2024/indexchapter1.htm",
+  "files": [
+    {
+      "path": "originals/Blake_Problems.txt",
+      "url": "https://www.12000.org/my_notes/CAS_integration_tests/reports/summer_2024/input/extra_problems/Blake_Problems.txt",
+      "sha256": "a79c7c867a559f8b769c4015949d659fd98d9e3492f86ba45863bbf696fe9c0a",
+      "syntax": "restricted-maple-like",
+      "records": 3154
+    },
+    {
+      "path": "originals/Blake_Integrate_Rational_Tests.txt",
+      "url": "https://www.12000.org/my_notes/CAS_integration_tests/reports/summer_2024/input/extra_problems/Blake_Integrate_Rational_Tests.txt",
+      "sha256": "2b6e11e3388ce1af6ad8f048a5dea21204f25f9161699b3377be1c3572bc00ca",
+      "syntax": "wolfram-language",
+      "records": 99
+    },
+    {
+      "path": "originals/Hebisch_Problems.txt",
+      "url": "https://www.12000.org/my_notes/CAS_integration_tests/reports/summer_2024/input/extra_problems/Hebisch_Problems.txt",
+      "sha256": "7815a137faca24c7d5fa2e18e8d03784413bb2b9e6047f22a6af20a16f8d5a8d",
+      "syntax": "restricted-maple-like",
+      "records": 10335
+    }
+  ],
+  "nativeCrossCheck": {
+    "path": "abbasi-native/CAS_integration_tests_2023_Mathematica_format.m",
+    "url": "https://www.12000.org/my_notes/CAS_integration_tests/reports/summer_2024/input/CAS_integration_tests_2023_Mathematica_format.m",
+    "sha256": "fc3c3268d69be8d480faef5bf9ceff8743e6fb12cf2e0ace68abb01f35221cb5",
+    "records": 85479,
+    "nativePrefixRecords": 71990,
+    "note": "Two-field integrands only; no optimal antiderivatives. Followed by 3154 Blake and 10335 Hebisch records."
+  },
+  "gradingReference": {
+    "url": "https://www.12000.org/my_notes/CAS_integration_tests/reports/summer_2024/code/GradeAntiderivative.m",
+    "sha256": "2612d498d4ebaa3b8628a750722e55e0ce23f76a2006767f2675cff30306cad2"
+  }
+}
