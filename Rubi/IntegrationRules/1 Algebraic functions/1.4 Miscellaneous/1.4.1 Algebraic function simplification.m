@@ -171,11 +171,11 @@ FreeQ[{a,b,m,n},x] && PolyQ[Px,x] && IGtQ[p,1] && IGtQ[n-m,0] && NeQ[Coeff[Px,x,
 
 (* ::Code:: *)
 Int[u_.*Px_^p_.*Qx_^q_.,x_Symbol] := With[{original = u*Px^p*Qx^q, rewritten = PolynomialQuotient[Px, Qx, x]^p*Qx^(p + q)},
-  If[SameQ[Simplify[rewritten], Simplify[Px^p*Qx^q]],
+  If[SameQ[rewritten, Px^p*Qx^q],
     If[FreeQ[original, x], original*x, (original*x)*Log[x]],
     Int[u*rewritten, x]
   ]
-] /; FreeQ[q, x] && PolyQ[Px, x] && PolyQ[Qx, x] && EqQ[PolynomialRemainder[Px, Qx, x], 0] && IntegerQ[p] && LtQ[p*q, 0] && (FreeQ[u*Px^p*Qx^q, x] || MatchQ[u*Px^p*Qx^q, constant_.*x^(-1) /; FreeQ[constant, x]] || !SameQ[Simplify[PolynomialQuotient[Px, Qx, x]^p*Qx^(p + q)], Simplify[Px^p*Qx^q]])
+] /; FreeQ[q, x] && PolyQ[Px, x] && PolyQ[Qx, x] && EqQ[PolynomialRemainder[Px, Qx, x], 0] && IntegerQ[p] && LtQ[p*q, 0] && (FreeQ[u*Px^p*Qx^q, x] || MatchQ[u*Px^p*Qx^q, constant_.*x^(-1) /; FreeQ[constant, x]] || !SameQ[PolynomialQuotient[Px, Qx, x]^p*Qx^(p + q), Px^p*Qx^q])
 
 
 (* ::Code:: *)
